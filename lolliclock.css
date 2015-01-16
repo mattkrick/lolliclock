@@ -1,42 +1,107 @@
+.clocks {
+  display: flex;
+}
+div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 #lolliclock {
-  height: 300px;
-  width: 200px;
+  height: 25rem;
+  width: 12.5rem;
   border: solid 1px #000;
-  color: #ffa500;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-size: 20px;
 }
-#clockHeader {
+#lolliclock-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  background-color: #03a9f4;
+  height: 5.6rem;
 }
-#clockContent {
+#lolliclock-time {
+  display: flex;
+  font-size: 2.3em;
+  font-weight: 400;
+  opacity: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#lolliclock-hours {
+  width: 1.2em;
+  text-align: right;
+}
+#lolliclock-colon {
+  width: auto;
+}
+#lolliclock-minutes {
+  width: 1.2em;
+}
+#lolliclock-ampm-label {
+  font-size: 0.22em;
+  position: absolute;
+  top: 8em;
+}
+#lolliclock-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex: 4;
 }
-#clockFace {
-  border: solid 1px #000;
-  width: 175px;
-  height: 175px;
+#lolliclock-face {
+  margin-top: 0.9em;
   border-radius: 50%;
   align-self: center;
+  background: #f0f0f0;
 }
-#ampm {
+#lolliclock-hourTicks {
+  width: 172px;
+  height: 172px;
+}
+#lolliclock-hand {
+  position: absolute;
+}
+#lolliclock-bearing {
+  stroke-width: 1;
+  fill: #000;
+}
+.lolliclock-tick {
+  position: absolute;
+  border-radius: 50%;
+  color: #666;
+  line-height: 26px;
+  text-align: center;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 0.55em;
+  font-weight: 600;
+}
+#lolliclock-ampm {
   display: flex;
   justify-content: space-around;
 }
-#clockButtons {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex: 1;
+.lolliclock-ampm-btn {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  height: 3.5em;
+  width: 3.5em;
+  font-size: 0.5em;
+  font-weight: 600;
+}
+.lolliclock-ampm-btn:focus {
+  outline: 0;
+}
+.lolliclock-ampm-btn:hover {
+  background-color: #b3e5fc;
+}
+.lolliclock-ampm-btn:active {
+  background-color: #03a9f4;
+  color: #fff;
 }
 .clockpicker .input-group-addon {
   cursor: pointer;
@@ -73,7 +138,7 @@
   background-color: #f8f8f8;
   padding: 12px;
 }
-.popover-content:last-child {
+.popover-contentlast-child {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -115,7 +180,7 @@
   cursor: pointer;
 }
 .clockpicker-tick.active,
-.clockpicker-tick:hover {
+.clockpicker-tickhover {
   background-color: #c0e5f7;
   background-color: rgba(0,149,221,0.25);
 }
@@ -128,11 +193,11 @@
   margin: 0;
   padding: 10px 0;
 }
-.clockpicker-button:hover {
+.clockpicker-buttonhover {
   background-image: none;
   background-color: #ebebeb;
 }
-.clockpicker-button:focus {
+.clockpicker-buttonfocus {
   outline: none !important;
 }
 .clockpicker-dial {
@@ -185,7 +250,7 @@
   stroke: #0095dd;
   stroke-width: 1;
   stroke-linecap: round;
-/*shape-rendering: crispEdges;*/
+/*shape-rendering crispEdges*/
 }
 .clockpicker-button.am-button {
   margin: 1px;
