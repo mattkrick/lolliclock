@@ -1,7 +1,15 @@
+@import 'nib'
 
-.clocks
-    display flex
-    
+img
+  position absolute
+  left 407px
+  top 37px
+// #clockpicker2
+//   position absolute
+//   left 208px
+//   top 200px
+input
+  width 200px
 primary100 = #B3E5FC
 primary500 = #03A9F4
 primary700 = #0288D1
@@ -14,274 +22,171 @@ secondaryTextColor = #727272
 darkTextColor = #212121
 dividerColor = #B6B6B6
 lightGrey = #F6F6F6
-div
-    margin 0
-    padding 0
-    border 0
-    
-#lolliclock
-    // height 18rem
-    height 25rem
-    width 12.5rem
-    border solid 1px black
-    color white
-    display flex
-    flex-direction column
-    // justify-content center
-    font-family "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif
-    font-size 20px
-    
-#lolliclock-header
-    display flex
-    justify-content center
-    align-items center
-    background-color primary500
-    height 5.6rem
-#lolliclock-time
-    display flex
-    font-size 2.3em
-    font-weight 400
-    opacity 60%
-    margin-left auto
-    margin-right auto
-#lolliclock-hours
-    width 1.2em
-    text-align right
-#lolliclock-colon
-    width auto
-#lolliclock-minutes
-    width 1.2em
-#lolliclock-ampm-label
-    font-size .22em
-    position absolute
-    top 8em
-    
-#lolliclock-content
-    display flex
-    flex-direction column
-    justify-content center
-#lolliclock-face
-    margin-top .9em
-    // border solid 1px black
-    border-radius 50%
-    align-self center
-    background rgba(240,240,240,1)
-#lolliclock-hourTicks
-    width 172px
-    height 172px 
-#lolliclock-hand
-    position absolute       
-#lolliclock-bearing
-    stroke-width 1
+
+
+.popover
+  position absolute
+  top 0
+  left 0
+  z-index 100
+  display none
+  max-width 200px
+  // border 1px solid #ccc
+  // border 1px solid rgba(0, 0, 0, .2)
+  border-radius 2px
+  box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16)
+  font-family "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif
+  font-size 20px
+  user-select none
+  
+.lolliclock-header
+  background primary500
+  height 85px    
+  display flex
+  color white
+  font-size 2.3em
+  font-weight 400
+  align-items center
+  justify-content center
+.lolliclock-time
+  display flex
+  align-self center
+.lolliclock-hours
+  width 50px
+  text-align right
+  opacity .6
+  cursor pointer
+  // transition all 3000ms
+  overflow hidden
+  height 54px
+  // transform scale(1)
+.lolliclock-colon
+  opacity .6
+  cursor default
+.lolliclock-minutes
+  width 50px
+  opacity .6
+  cursor pointer
+.lolliclock-am-pm
+  cursor pointer
+  font-size 10px
+  position absolute
+  top 50px
+  left 160px
+  opacity .6
+// .scale
+//   transform translate3d(0,-100px,0)
+.text-primary
+  opacity 1
+  color #FFFFFF
+.lolliclock-hours-old
+  height 54px
+  opacity 1
+  transition all 350ms
+.lolliclock-hours:hover .lolliclock-hours-old
+  margin-top -54px
+  opacity 0
+.lolliclock-hours:hover .lolliclock-hours-new
+  opacity 1
+.lolliclock-hours-new
+  opacity 0
+  transition all 350ms
+  
+.popover-content
+  padding 18px 14px
+  
+
+.lolliclock-plate
+.lolliclock-canvas
+.lolliclock-dial
+  width 168px
+  height 168px   
+  
+.lolliclock-plate  
+  background rgb(240,240,240)
+  border-radius 100%   
+  position relative
+.lolliclock-canvas
+.lolliclock-dial
+  position absolute   
+.lolliclock-bearing
     fill black
-    
-.lolliclock-tick
-    position absolute
-    border-radius 50%
-    color #666
-    line-height 26px
-    text-align center
-    width 26px
-    height 26px
-    cursor pointer   
-    font-size .55em
-    font-weight 600
-    
-#lolliclock-ampm
-    display flex
-    justify-content space-around
-    // font-size .8em
-.lolliclock-ampm-btn
-    background-color transparent
-    border none
-    border-radius 50%
-    height 3.5em
-    width 3.5em
-    font-size .5em
-    font-weight 600
-.lolliclock-ampm-btn:focus
-    outline 0
-.lolliclock-ampm-btn:hover
-    background-color primary100
-.lolliclock-ampm-btn:active  
-    background-color primary500
-    color white
-    
-// #lolliclock-buttons
-//     flex 1
-//     display flex
-//     justify-content flex-end
-//     align-items flex-end
-    
-//     color primary500
-    
-
-
-
-
-
-
-
-
-.clockpicker .input-group-addon {
-    cursor pointer
-}
-.clockpicker-moving {
-    cursor move
-}
-.clockpicker-align-left.popover > .arrow {
-    left 25px
-}
-.clockpicker-align-top.popover > .arrow {
-    top 17px
-}
-.clockpicker-align-right.popover > .arrow {
-    left auto
-    right 25px
-}
-.clockpicker-align-bottom.popover > .arrow {
-    top auto
-    bottom 6px
-}
-.clockpicker-popover .popover-title {
-    background-color #fff
-    color #999
-    font-size 24px
-    font-weight bold
-    line-height 30px
-    text-align center
-}
-.clockpicker-popover .popover-title span {
-    cursor pointer
-}
-.clockpicker-popover .popover-content {
-    background-color #f8f8f8
-    padding 12px
-}
-.popover-contentlast-child {
-    border-bottom-left-radius 5px
-    border-bottom-right-radius 5px
-}
-.clockpicker-plate {
-    background-color #fff
-    border 1px solid #ccc
-    border-radius 50%
-    width 200px
-    height 200px
-    overflow visible
-    position relative
-    /* Disable text selection highlighting. Thanks to Hermanya */
-    -webkit-touch-callout none
-    -webkit-user-select none
-    -khtml-user-select none
-    -moz-user-select none
-    -ms-user-select none
-    user-select none
-}
-.clockpicker-canvas,
-.clockpicker-dial {
-    width 200px
-    height 200px
-    position absolute
-    left -1px
-    top -1px
-}
-.clockpicker-minutes {
-    visibility hidden
-}
-.clockpicker-tick {
-    border-radius 50%
-    color #666
-    line-height 26px
-    text-align center
-    width 26px
-    height 26px
-    position absolute
-    cursor pointer
-}
-.clockpicker-tick.active,
-.clockpicker-tickhover {
-    background-color rgb(192, 229, 247)
-    background-color rgba(0, 149, 221, .25)
-}
-.clockpicker-button {
-    background-image none
-    background-color #fff
-    border-width 1px 0 0
-    border-top-left-radius 0
-    border-top-right-radius 0
-    margin 0
-    padding 10px 0
-}
-.clockpicker-buttonhover {
-    background-image none
-    background-color #ebebeb
-}
-.clockpicker-buttonfocus {
-    outline none!important
-}
-.clockpicker-dial {
-    -webkit-transition -webkit-transform 350ms, opacity 350ms
-    -moz-transition -moz-transform 350ms, opacity 350ms
-    -ms-transition -ms-transform 350ms, opacity 350ms
-    -o-transition -o-transform 350ms, opacity 350ms
-    transition transform 350ms, opacity 350ms
-}
-.clockpicker-dial-out {
-    opacity 0
-}
-.clockpicker-hours.clockpicker-dial-out {
-    -webkit-transform scale(1.2, 1.2)
-    -moz-transform scale(1.2, 1.2)
-    -ms-transform scale(1.2, 1.2)
-    -o-transform scale(1.2, 1.2)
-    transform scale(1.2, 1.2)
-}
-.clockpicker-minutes.clockpicker-dial-out {
-    -webkit-transform scale(.8, .8)
-    -moz-transform scale(.8, .8)
-    -ms-transform scale(.8, .8)
-    -o-transform scale(.8, .8)
-    transform scale(.8, .8)
-}
-.clockpicker-canvas {
-    -webkit-transition opacity 175ms
-    -moz-transition opacity 175ms
-    -ms-transition opacity 175ms
-    -o-transition opacity 175ms
-    transition opacity 175ms
-}
-.clockpicker-canvas-out {
-    opacity 0.25
-}
-.clockpicker-canvas-bearing,
-.clockpicker-canvas-fg {
-    stroke none
-    fill rgb(0, 149, 221)
-}
-.clockpicker-canvas-bg {
-    stroke none
-    fill rgb(192, 229, 247)
-}
-.clockpicker-canvas-bg-trans {
-    fill rgba(0, 149, 221, .25)
-}
-.clockpicker-canvas line {
-    stroke rgb(0, 149, 221)
+    stroke-width 1
+.lolliclock-canvas line
+    stroke primary100
     stroke-width 1
     stroke-linecap round
-    /*shape-rendering crispEdges*/
-}
-.clockpicker-button.am-button {
-    margin 1px
-    padding 5px
-    border 1px solid rgba(0, 0, 0, .2)
-    border-radius 4px
+.lolliclock-canvas-fg 
+  stroke none
+  fill primary700
 
-}
-.clockpicker-button.pm-button {
-    margin 1px 1px 1px 136px
-    padding 5px
-    border 1px solid rgba(0, 0, 0, .2)
-    border-radius 4px
-}
+.lolliclock-canvas-bg-trans 
+  fill rgba(primary500, .25)    
+ 
+.lolliclock-tick
+  border-radius 100%
+  color #666
+  line-height 24px
+  text-align center
+  width 24px
+  height 24px
+  font-size .55em
+  font-weight 600
+  position absolute
+  cursor pointer
+  
+.lolliclock-tick.active
+.lolliclock-tick:hover
+  background primary100
+    
+.lolliclock-ampm-block
+  display flex
+  justify-content space-around
+    // font-size .8em
+.lolliclock-ampm-btn
+  position relative
+  height 35px
+  width 35px
+  border-radius 100%
+  font-size 12px
+  font-weight 600
+  cursor pointer
+
+.lolliclock-btn-background
+  position absolute
+  height 35px
+  width 35px  
+  opacity 0
+  transform scale(0)
+  
+.lolliclock-btn-text
+  position absolute  
+  width 100%
+  text-align center
+  line-height 35px
+  vertical-align middle  
+  color darkTextColor
+        
+.active-button-background
+  background-color primary500
+  border-radius 100%
+  transition transform 150ms
+  transform scale(1)
+  opacity 1
+.active-button-text
+  color #FFFFFF     
+    
+.lolliclock-ampm-btn:focus
+  outline 0
+
+.clockpicker-clickable
+    cursor pointer
+    // must be above -moving
+         
+.clockpicker-moving
+    cursor move 
+    cursor -webkit-grabbing
+    cursor -moz-grabbing
+    
+.hidden
+    visibility hidden

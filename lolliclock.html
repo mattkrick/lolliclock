@@ -1,11 +1,15 @@
 <html>
 <head>
     <link rel="stylesheet" href="lolliclock.css"/>
+    <link rel="stylesheet" href="standalone.css"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="lolliclock.js"></script>
+    <script src="jquery-clockpicker.js"></script>
+    <script>
+        $('#clockpicker').clockpicker();
+    </script>
 </head>
-    <input type="text">
+    <input id='clock' class="clockpicker" type="text">
     <div class="inner">Hello</div>
     <div class="clocks">
         <div id="lolliclock">
@@ -22,13 +26,12 @@
             <div id="lolliclock-content">
                 <div id="lolliclock-face">
                     <div id="lolliclock-hand">
-                        <svg class="clockpicker-svg" width="172" height="172">
-                            <g transform="translate(86,86)">
-                                <line x1="0" y1="0" x2="69.28203230275508" y2="-40.00000000000001"></line>
-                                <circle class="clockpicker-canvas-fg" r="3.5" cx="69.28203230275508" cy="-40.00000000000001"></circle>
-                                <circle class="clockpicker-canvas-bg" r="13" cx="69.28203230275508" cy="-40.00000000000001"></circle>
-                                <circle class="lolliclock-bearing" cx="0" cy="0" r="1"></circle>
-                            </g>
+                        <svg class="" width="171" height="171">
+                            <!-- <g transform="translate(86,86)"> -->
+                                <line x1="86" y1="88" x2="159" y2="88"></line>
+                                <circle id="lolliclock-highlight" r="12.5" cx="155" cy="88"></circle>
+                                <circle id="lolliclock-bearing" cx="86" cy="88" r="1"></circle>
+                            <!-- </g> -->
                         </svg>
                     </div>
                     <div id="lolliclock-hourTicks"></div>
