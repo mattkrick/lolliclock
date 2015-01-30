@@ -9,7 +9,11 @@ img
 //   left 208px
 //   top 200px
 input
+  position absolute
   width 200px
+  left 100px
+  top 300px
+  
 primary100 = #B3E5FC
 primary500 = #03A9F4
 primary700 = #0288D1
@@ -22,7 +26,7 @@ secondaryTextColor = #727272
 darkTextColor = #212121
 dividerColor = #B6B6B6
 lightGrey = #F6F6F6
-
+standardDelay = 350ms
 
 .popover
   position absolute
@@ -38,7 +42,8 @@ lightGrey = #F6F6F6
   font-family "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif
   font-size 20px
   user-select none
-  
+
+//Header
 .lolliclock-header
   background primary500
   height 85px    
@@ -56,10 +61,8 @@ lightGrey = #F6F6F6
   text-align right
   opacity .6
   cursor pointer
-  // transition all 3000ms
   overflow hidden
   height 54px
-  // transform scale(1)
 .lolliclock-colon
   opacity .6
   cursor default
@@ -67,48 +70,65 @@ lightGrey = #F6F6F6
   width 50px
   opacity .6
   cursor pointer
+  overflow hidden
+  height 54px
 .lolliclock-am-pm
   cursor pointer
   font-size 10px
   position absolute
-  top 50px
-  left 160px
+  top 47px
+  left 157px
   opacity .6
-// .scale
-//   transform translate3d(0,-100px,0)
+  padding 3px
 .text-primary
   opacity 1
   color #FFFFFF
 .lolliclock-hours-old
+  opacity 1
   height 54px
-  opacity 1
-  transition all 350ms
-.lolliclock-hours:hover .lolliclock-hours-old
-  margin-top -54px
-  opacity 0
-.lolliclock-hours:hover .lolliclock-hours-new
-  opacity 1
 .lolliclock-hours-new
   opacity 0
-  transition all 350ms
-  
-.popover-content
-  padding 18px 14px
+.lolliclock-time .old-up
+  animation: transition-top-up standardDelay forwards
+.lolliclock-time .new-up
+  animation: transition-bottom-up standardDelay forwards
+.lolliclock-time .old-down
+  animation: transition-top-up standardDelay forwards reverse
+.lolliclock-time .new-down
+  animation: transition-bottom-up standardDelay forwards reverse
+@keyframes transition-top-up
+  0%   { margin-top: 0; opacity: 1; }
+  100% { margin-top: -54px; opacity: 0; }
+@keyframes transition-bottom-up
+  0%   { opacity: 0; }
+  100% { opacity: 1; } 
   
 
+//Content
+.popover-content
+  padding 18px 14px
 .lolliclock-plate
 .lolliclock-canvas
 .lolliclock-dial
   width 168px
   height 168px   
-  
+.lolliclock-dial
+  transition all standardDelay
+.lolliclock-dial-out
+  transform scale(1.25, 1.25)
+  opacity 0
+// .lolliclock-canvas-out 
+  // opacity 0.25 //temporary hand fade while the minutes hand animates in
+  // transition opacity 175ms
 .lolliclock-plate  
   background rgb(240,240,240)
   border-radius 100%   
   position relative
 .lolliclock-canvas
 .lolliclock-dial
-  position absolute   
+  position absolute
+.lolliclock-dial-minutes
+  visibility hidden   
 .lolliclock-bearing
     fill black
     stroke-width 1
@@ -120,7 +140,7 @@ lightGrey = #F6F6F6
   stroke none
   fill primary700
 
-.lolliclock-canvas-bg-trans 
+.lolliclock-canvas-bg
   fill rgba(primary500, .25)    
  
 .lolliclock-tick
@@ -148,7 +168,7 @@ lightGrey = #F6F6F6
   height 35px
   width 35px
   border-radius 100%
-  font-size 12px
+  font-size 10px
   font-weight 600
   cursor pointer
 
@@ -170,7 +190,7 @@ lightGrey = #F6F6F6
 .active-button-background
   background-color primary500
   border-radius 100%
-  transition transform 150ms
+  transition transform 175ms
   transform scale(1)
   opacity 1
 .active-button-text

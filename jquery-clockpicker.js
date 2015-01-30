@@ -82,18 +82,21 @@
 				'<div class="lolliclock-time">',
 					'<div class="lolliclock-hours text-primary">',
 						'<div class="lolliclock-hours-old"></div>',
-						'<div class="lolliclock-hours-new">11</div>',
+						'<div class="lolliclock-hours-new"></div>',
 					'</div>',
 					'<span class="lolliclock-colon">:</span>',
-					'<span class="lolliclock-minutes"></span>',
+					'<div class="lolliclock-minutes text-primary">',
+						'<div class="lolliclock-minutes-old">00</div>',
+						'<div class="lolliclock-minutes-new"></div>',
+					'</div>',
 				'</div>',
 				'<span class="lolliclock-am-pm"></span>',
 			'</div>',
 			'<div class="popover-content">',
 				'<div class="lolliclock-plate">',
 					'<div class="lolliclock-canvas"></div>',
-					'<div class="lolliclock-dial clockpicker-hours"></div>',
-					'<div class="lolliclock-dial clockpicker-minutes lolliclock-dial-out"></div>',
+					'<div class="lolliclock-dial lolliclock-dial-hours"></div>',
+					'<div class="lolliclock-dial lolliclock-dial-minutes lolliclock-dial-out"></div>',
 				'</div>',
 				'<div class="lolliclock-ampm-block">',
 					'<div id="lolliclock-btn-am" class="lolliclock-ampm-btn">',  
@@ -109,13 +112,12 @@
 			'</div>',
 		'</div>'
 	].join('');
-
 	// ClockPicker
 	function ClockPicker(element, options) {
 		var popover = $(tpl),
 			plate = popover.find('.lolliclock-plate'),
-			hoursView = popover.find('.clockpicker-hours'),
-			minutesView = popover.find('.clockpicker-minutes'),
+			hoursView = popover.find('.lolliclock-dial-hours'),
+			minutesView = popover.find('.lolliclock-dial-minutes'),
 			isInput = element.prop('tagName') === 'INPUT',
 			input = isInput ? element : element.find('input'),
 			self = this,
@@ -133,7 +135,7 @@
 		this.hoursView = hoursView;
 		this.minutesView = minutesView;
 		// this.amPmBlock = popover.find('.lolliclock-ampm-block');
-		this.spanHours = popover.find('.lolliclock-hours-old');
+		this.spanHours = popover.find('.lolliclock-hours');
 		this.spanMinutes = popover.find('.lolliclock-minutes');
 		this.spanAmPm = popover.find('.lolliclock-am-pm');
 		this.amOrPm = "PM";
@@ -246,9 +248,9 @@
 					self.setHand(x, y);
 				}
 				if (self.currentView === 'hours') {
-					self.toggleView('minutes', duration / 2);
+					self.toggleView('minutes', duration / .002);
 
-					// Edit here if you want to auto-grab minutes
+					// Edit here if you want to put an auto-grabber on minutes
 				} else {
 					if (options.autoclose) {
 						self.minutesView.addClass('lolliclock-dial-out');
@@ -422,21 +424,13 @@
 			this.isAppended = true;
 		}
 
-		//TODO: Get the time
-		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
-		if (value[0] === 'now') {
-			var now = new Date(+ new Date() + this.options.fromnow);
-			value = [
-				now.getHours(),
-				now.getMinutes()
-			];
-		}
-		this.hours = + value[0] || 0;
-		this.minutes = + value[1] || 0;
-		this.amOrPm = "AM";
+		//Get the time
+		var value = new Date('1970 1 1 ' + this.input.prop('value') || this.options['default'] || '');
+		this.hours = value.getHours() % 12;
+		this.minutes = value.getMinutes();
+		this.amOrPm = value.getHours() > 11 ? "AM" : "PM"; //purposefully wrong because we change it next line
 		this.changeAmPm();
-		// this.spanHours.html(leadingZero(this.hours));
-		this.spanMinutes.html(leadingZero(this.minutes));
+		// this.spanMinutes.html(leadingZero(this.minutes));
 
 		// Toggle to hours view
 		this.toggleView('hours');
@@ -494,7 +488,7 @@
 		this.currentView = view;
 
 		this.spanHours.toggleClass('text-primary', isHours);
-		this.spanMinutes.toggleClass('text-primary', ! isHours);
+		this.spanMinutes.toggleClass('text-primary', !isHours);
 
 		// Let's make transitions
 		hideView.addClass('lolliclock-dial-out');
@@ -601,9 +595,36 @@
 				}
 			}
 		}
-
+		//TODO: Keep tens digit static for hours
 		this[this.currentView] = value;
-		isHours ? this.spanHours.html(value) : this.spanMinutes.html(leadingZero(value));
+		function cleanupAnimation($obj) {
+			$obj.on('webkitAnimationEnd animationend MSAnimationEnd oanimationend',
+		    	function() {
+			    	$oldTime.html(value) //only needed for -up transitions
+			        $oldTime.removeClass("old-down old-up");
+			        $newTime.removeClass("new-down new-up");
+			        $oldTime.off('webkitAnimationEnd animationend MSAnimationEnd oanimationend');
+	    	})
+		};	
+	 	if (isHours) {
+		 	var $oldTime = $(this.spanHours[0].childNodes[0]);
+		 	var $newTime = $(this.spanHours[0].childNodes[1]);
+		} else {
+		 	var $oldTime = $(this.spanMinutes[0].childNodes[0]);
+		 	var $newTime = $(this.spanMinutes[0].childNodes[1]);
+		 	value = leadingZero(value);
+		}
+		cleanupAnimation($oldTime);
+ 		if (value < (+$oldTime.html())) {
+			$newTime.html($oldTime.html());
+			$oldTime.html(value);
+			$newTime.addClass('new-down');
+			$oldTime.addClass('old-down');
+		} else if (value > (+$oldTime.html())) {
+	 		$newTime.html(value);
+		 	$oldTime.addClass('old-up');
+		 	$newTime.addClass('new-up');		
+	 	}
 
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
@@ -617,7 +638,7 @@
 		this.g.insertBefore(this.hand, this.bearing);
 		this.g.insertBefore(this.bg, this.fg);
 		//TODO: put fg behind
-		this.bg.setAttribute('class', 'lolliclock-canvas-bg lolliclock-canvas-bg-trans');
+		this.bg.setAttribute('class', 'lolliclock-canvas-bg');
 
 		// Set clock hand and others' position
 		var cx = Math.sin(radian) * radius,
@@ -665,6 +686,10 @@
 			this.popover.remove();
 		}
 	};
+
+	ClockPicker.prototype.getData = function() {
+		return new Date('1970 1 1 ' + this.input.prop('value', value));
+	}
 
 	// Extends $.fn.clockpicker
 	$.fn.clockpicker = function(option){

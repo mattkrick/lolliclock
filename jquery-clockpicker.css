@@ -11,7 +11,7 @@
 /* Picked from bootstrap: .popover, .btn, .text-primary */
 
 
-.popover.top {
+/*.popover.top {
   margin-top: -10px;
 }
 .popover.right {
@@ -22,73 +22,29 @@
 }
 .popover.left {
   margin-left: -10px;
-}
-.clockpicker .input-group-addon {
-	cursor: pointer;
-}
+}*/
 
-.clockpicker-minutes {
-	visibility: hidden;
-}
-
-.clockpicker-button {
-	background-image: none;
-	background-color: #fff;
-	border-width: 1px 0 0;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-	margin: 0;
-	padding: 10px 0;
-}
-.clockpicker-button:hover {
-	background-image: none;
-	background-color: #ebebeb;
-}
-.clockpicker-button:focus {
-	outline: none!important;
-}
-.lolliclock-dial {
+/*.lolliclock-dial {
 	-webkit-transition: -webkit-transform 350ms, opacity 350ms;
 	-moz-transition: -moz-transform 350ms, opacity 350ms;
 	-ms-transition: -ms-transform 350ms, opacity 350ms;
 	-o-transition: -o-transform 350ms, opacity 350ms;
 	transition: transform 350ms, opacity 350ms;
-}
-.lolliclock-dial-out {
+}*/
+/*.lolliclock-dial-out {
 	opacity: 0;
-}
-.clockpicker-hours.lolliclock-dial-out {
+}*/
+/*.lolliclock-dial-hours.lolliclock-dial-out {
 	-webkit-transform: scale(1.2, 1.2);
 	-moz-transform: scale(1.2, 1.2);
 	-ms-transform: scale(1.2, 1.2);
 	-o-transform: scale(1.2, 1.2);
 	transform: scale(1.2, 1.2);
 }
-.clockpicker-minutes.lolliclock-dial-out {
+.lolliclock-dial-minutes.lolliclock-dial-out {
 	-webkit-transform: scale(.8, .8);
 	-moz-transform: scale(.8, .8);
 	-ms-transform: scale(.8, .8);
 	-o-transform: scale(.8, .8);
 	transform: scale(.8, .8);
-}
-.lolliclock-canvas {
-	-webkit-transition: opacity 175ms;
-	-moz-transition: opacity 175ms;
-	-ms-transition: opacity 175ms;
-	-o-transition: opacity 175ms;
-	transition: opacity 175ms;
-}
-.lolliclock-canvas-out {
-	opacity: 0.25;
-}
-.lolliclock-canvas-fg {
-	stroke: none;
-	fill: rgb(0, 149, 221);
-}
-.lolliclock-canvas-bg {
-	stroke: none;
-	fill: rgb(192, 229, 247);
-}
-.lolliclock-canvas-bg-trans {
-	fill: rgba(0, 149, 221, .25);
-}
+}*/
