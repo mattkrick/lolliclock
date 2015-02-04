@@ -1,0 +1,43 @@
+			//jQuery time
+			var ripple, d, x, y;
+			$(".lolliclock-button").on('mousedown',function(e){
+				// $(this) = $(this);
+				// console.log($(this));
+				//create .ripple element if it doesn't exist
+				if($(this).find(".ripple").length === 0)
+					$(this).prepend("<span class='ripple'></span>");
+					
+				ripple = $(this).find(".ripple");
+				console.log(ripple);
+				//incase of quick double clicks stop the previous animation
+				// ripple.removeClass("animate");
+				
+				//set size of .ripple
+				if(!ripple.height() && !ripple.width()) {
+					d = Math.max($(this).outerWidth(), $(this).outerHeight());
+					ripple.css({height: d, width: d});
+				}
+				x = e.pageX - $(this).offset().left - ripple.width()/2;
+				y = e.pageY - $(this).offset().top - ripple.height()/2;
+				
+				//set the position and add class .animate
+				ripple.css({top: y+'px', left: x+'px'}).addClass("animate");
+				ripple.on('webkitAnimationEnd animationend MSAnimationEnd oanimationend',
+	    		function() {
+		        ripple.removeClass("animate");
+		        ripple.off('webkitAnimationEnd animationend MSAnimationEnd oanimationend');
+	    	})
+			})
+
+
+  position relative
+  overflow hidden
+.ripple {
+  display: block; position: absolute;
+  background: rgba(primary700, 0.20)
+  border-radius 100%
+  transform scale(0)
+}
+.ripple.animate {animation: ripple standardDelay*1.5 cubic-bezier(0, 0, 0.2, 1);}
+@keyframes ripple
+  100% {transform: scale(2)}

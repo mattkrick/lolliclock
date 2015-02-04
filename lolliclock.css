@@ -3,11 +3,14 @@ img {
   left: 407px;
   top: 37px;
 }
+body {
+  height: 2000px;
+}
 input {
   position: absolute;
-  width: 200px;
-  left: 100px;
-  top: 300px;
+  width: 192px;
+  left: 200px;
+  top: 40px;
 }
 .popover {
   position: absolute;
@@ -15,12 +18,14 @@ input {
   left: 0;
   z-index: 100;
   display: none;
-  max-width: 200px;
+  width: 196px;
+  height: 380px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26), 0 2px 10px 0 rgba(0,0,0,0.16);
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26), 0 2px 10px 0 rgba(0,0,0,0.16);
   font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  background-color: #fff;
   font-size: 20px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -30,6 +35,7 @@ input {
 .lolliclock-header {
   background: #03a9f4;
   height: 85px;
+  width: 196px;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -51,6 +57,9 @@ input {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  height: 0;
 }
 .lolliclock-time {
   display: -webkit-box;
@@ -105,13 +114,13 @@ input {
   filter: none;
   color: #fff;
 }
-.lolliclock-hours-old {
+.lolliclock-time-old {
   opacity: 1;
   -ms-filter: none;
   filter: none;
   height: 54px;
 }
-.lolliclock-hours-new {
+.lolliclock-time-new {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
@@ -146,6 +155,10 @@ input {
 }
 .popover-content {
   padding: 18px 14px;
+  width: 168px;
+  height: 203px;
+  top: 85px;
+  position: absolute;
 }
 .lolliclock-plate,
 .lolliclock-canvas,
@@ -175,6 +188,123 @@ input {
   -webkit-border-radius: 100%;
   border-radius: 100%;
   position: relative;
+}
+.lolliclock-plate.animate {
+  -webkit-animation: open-clock 350ms;
+  -moz-animation: open-clock 350ms;
+  -o-animation: open-clock 350ms;
+  -ms-animation: open-clock 350ms;
+  animation: open-clock 350ms;
+}
+@-moz-keyframes open-clock {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes open-clock {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@-o-keyframes open-clock {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes open-clock {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+.popover.animate {
+  -webkit-animation: open-popover 350ms;
+  -moz-animation: open-popover 350ms;
+  -o-animation: open-popover 350ms;
+  -ms-animation: open-popover 350ms;
+  animation: open-popover 350ms;
+}
+@-moz-keyframes open-popover {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 380px;
+  }
+}
+@-webkit-keyframes open-popover {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 380px;
+  }
+}
+@-o-keyframes open-popover {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 380px;
+  }
+}
+@keyframes open-popover {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 380px;
+  }
+}
+.lolliclock-header.animate {
+  -webkit-animation: slide-header 175ms 175ms forwards;
+  -moz-animation: slide-header 175ms 175ms forwards;
+  -o-animation: slide-header 175ms 175ms forwards;
+  -ms-animation: slide-header 175ms 175ms forwards;
+  animation: slide-header 175ms 175ms forwards;
 }
 .lolliclock-canvas,
 .lolliclock-dial {
@@ -255,7 +385,7 @@ input {
   vertical-align: middle;
   color: #212121;
 }
-.active-button-background {
+.lolliclock-active-button-background {
   background-color: #03a9f4;
   -webkit-border-radius: 100%;
   border-radius: 100%;
@@ -273,22 +403,53 @@ input {
   -ms-filter: none;
   filter: none;
 }
-.active-button-text {
+.lolliclock-active-button-text {
   color: #fff;
 }
 .lolliclock-ampm-btn:focus {
   outline: 0;
 }
-.clockpicker-clickable {
+.lolliclock-clickable {
   cursor: pointer;
 }
-.clockpicker-moving {
+.lolliclock-moving {
   cursor: move;
   cursor: -webkit-grabbing;
   cursor: -moz-grabbing;
 }
-.hidden {
-  visibility: hidden;
+.lolliclock-buttons {
+  font-size: 10px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: end;
+  -moz-box-pack: end;
+  -o-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  position: absolute;
+  width: 196px;
+  top: 324px;
+}
+.lolliclock-button {
+  font-weight: 700;
+  color: #03a9f4;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 32px;
+  margin: 0 4px;
+  background: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 @-moz-keyframes transition-top-up {
   0% {
@@ -392,5 +553,37 @@ input {
     opacity: 1;
     -ms-filter: none;
     filter: none;
+  }
+}
+@-moz-keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
+  }
+}
+@-webkit-keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
+  }
+}
+@-o-keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
+  }
+}
+@keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
   }
 }
