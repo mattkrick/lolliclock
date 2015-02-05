@@ -19,7 +19,7 @@ input {
   z-index: 100;
   display: none;
   width: 196px;
-  height: 380px;
+  height: 324px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26), 0 2px 10px 0 rgba(0,0,0,0.16);
@@ -31,6 +31,14 @@ input {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.popover.animate {
+  max-height: 0;
+  -webkit-animation: open-popover 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: open-popover 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: open-popover 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: open-popover 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: open-popover 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 .lolliclock-header {
   background: #03a9f4;
@@ -59,7 +67,14 @@ input {
   justify-content: center;
   overflow: hidden;
   position: absolute;
+}
+.lolliclock-header.animate {
   height: 0;
+  -webkit-animation: slide-header 175ms 175ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: slide-header 175ms 175ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: slide-header 175ms 175ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: slide-header 175ms 175ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slide-header 175ms 175ms forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 .lolliclock-time {
   display: -webkit-box;
@@ -126,32 +141,60 @@ input {
   filter: alpha(opacity=0);
 }
 .lolliclock-time .old-up {
-  -webkit-animation: transition-top-up 350ms forwards;
-  -moz-animation: transition-top-up 350ms forwards;
-  -o-animation: transition-top-up 350ms forwards;
-  -ms-animation: transition-top-up 350ms forwards;
-  animation: transition-top-up 350ms forwards;
+  -webkit-animation: transition-top-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-top-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-top-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-top-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-top-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 .lolliclock-time .new-up {
-  -webkit-animation: transition-bottom-up 350ms forwards;
-  -moz-animation: transition-bottom-up 350ms forwards;
-  -o-animation: transition-bottom-up 350ms forwards;
-  -ms-animation: transition-bottom-up 350ms forwards;
-  animation: transition-bottom-up 350ms forwards;
+  -webkit-animation: transition-bottom-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-bottom-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-bottom-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-bottom-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-bottom-up 350ms forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 .lolliclock-time .old-down {
-  -webkit-animation: transition-top-up 350ms forwards reverse;
-  -moz-animation: transition-top-up 350ms forwards reverse;
-  -o-animation: transition-top-up 350ms forwards reverse;
-  -ms-animation: transition-top-up 350ms forwards reverse;
-  animation: transition-top-up 350ms forwards reverse;
+  -webkit-animation: transition-top-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-top-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-top-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-top-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-top-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
 }
 .lolliclock-time .new-down {
-  -webkit-animation: transition-bottom-up 350ms forwards reverse;
-  -moz-animation: transition-bottom-up 350ms forwards reverse;
-  -o-animation: transition-bottom-up 350ms forwards reverse;
-  -ms-animation: transition-bottom-up 350ms forwards reverse;
-  animation: transition-bottom-up 350ms forwards reverse;
+  -webkit-animation: transition-bottom-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-bottom-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-bottom-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-bottom-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-bottom-up 350ms forwards reverse cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lolliclock-minutes .lolliclock-time-old.animate {
+  -webkit-animation: transition-top-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-top-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-top-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-top-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-top-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lolliclock-minutes .lolliclock-time-new.animate {
+  -webkit-animation: transition-bottom-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-bottom-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-bottom-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-bottom-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-bottom-up 87.5ms 245ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lolliclock-hours .lolliclock-time-old.animate {
+  -webkit-animation: transition-top-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-top-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-top-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-top-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-top-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lolliclock-hours .lolliclock-time-new.animate {
+  -webkit-animation: transition-bottom-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-animation: transition-bottom-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -o-animation: transition-bottom-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-animation: transition-bottom-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  animation: transition-bottom-up 87.5ms 262.5ms forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 .popover-content {
   padding: 18px 14px;
@@ -190,121 +233,16 @@ input {
   position: relative;
 }
 .lolliclock-plate.animate {
-  -webkit-animation: open-clock 350ms;
-  -moz-animation: open-clock 350ms;
-  -o-animation: open-clock 350ms;
-  -ms-animation: open-clock 350ms;
-  animation: open-clock 350ms;
-}
-@-moz-keyframes open-clock {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    -o-transform: scale(0);
-    -ms-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-  }
-}
-@-webkit-keyframes open-clock {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    -o-transform: scale(0);
-    -ms-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-  }
-}
-@-o-keyframes open-clock {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    -o-transform: scale(0);
-    -ms-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-  }
-}
-@keyframes open-clock {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    -o-transform: scale(0);
-    -ms-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-  }
-}
-.popover.animate {
-  -webkit-animation: open-popover 350ms;
-  -moz-animation: open-popover 350ms;
-  -o-animation: open-popover 350ms;
-  -ms-animation: open-popover 350ms;
-  animation: open-popover 350ms;
-}
-@-moz-keyframes open-popover {
-  0% {
-    max-height: 0;
-  }
-  100% {
-    max-height: 380px;
-  }
-}
-@-webkit-keyframes open-popover {
-  0% {
-    max-height: 0;
-  }
-  100% {
-    max-height: 380px;
-  }
-}
-@-o-keyframes open-popover {
-  0% {
-    max-height: 0;
-  }
-  100% {
-    max-height: 380px;
-  }
-}
-@keyframes open-popover {
-  0% {
-    max-height: 0;
-  }
-  100% {
-    max-height: 380px;
-  }
-}
-.lolliclock-header.animate {
-  -webkit-animation: slide-header 175ms 175ms forwards;
-  -moz-animation: slide-header 175ms 175ms forwards;
-  -o-animation: slide-header 175ms 175ms forwards;
-  -ms-animation: slide-header 175ms 175ms forwards;
-  animation: slide-header 175ms 175ms forwards;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-animation: open-clock 175ms 175ms forwards;
+  -moz-animation: open-clock 175ms 175ms forwards;
+  -o-animation: open-clock 175ms 175ms forwards;
+  -ms-animation: open-clock 175ms 175ms forwards;
+  animation: open-clock 175ms 175ms forwards;
 }
 .lolliclock-canvas,
 .lolliclock-dial {
@@ -364,6 +302,26 @@ input {
   font-weight: 600;
   cursor: pointer;
 }
+.lolliclock-ampm-btn.animate {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-animation: open-btn 133ms 217ms forwards;
+  -moz-animation: open-btn 133ms 217ms forwards;
+  -o-animation: open-btn 133ms 217ms forwards;
+  -ms-animation: open-btn 133ms 217ms forwards;
+  animation: open-btn 133ms 217ms forwards;
+}
+.lolliclock-button.animate {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-animation: open-btn 87.5ms 262.5ms forwards;
+  -moz-animation: open-btn 87.5ms 262.5ms forwards;
+  -o-animation: open-btn 87.5ms 262.5ms forwards;
+  -ms-animation: open-btn 87.5ms 262.5ms forwards;
+  animation: open-btn 87.5ms 262.5ms forwards;
+}
 .lolliclock-btn-background {
   position: absolute;
   height: 35px;
@@ -418,7 +376,7 @@ input {
   cursor: -moz-grabbing;
 }
 .lolliclock-buttons {
-  font-size: 10px;
+  font-size: 11px;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -450,6 +408,58 @@ input {
   text-transform: uppercase;
   -webkit-border-radius: 2px;
   border-radius: 2px;
+}
+@-moz-keyframes open-popover {
+  100% {
+    max-height: 380px;
+  }
+}
+@-webkit-keyframes open-popover {
+  100% {
+    max-height: 380px;
+  }
+}
+@-o-keyframes open-popover {
+  100% {
+    max-height: 380px;
+  }
+}
+@keyframes open-popover {
+  100% {
+    max-height: 380px;
+  }
+}
+@-moz-keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
+  }
+}
+@-webkit-keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
+  }
+}
+@-o-keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
+  }
+}
+@keyframes slide-header {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 85px;
+  }
 }
 @-moz-keyframes transition-top-up {
   0% {
@@ -555,35 +565,127 @@ input {
     filter: none;
   }
 }
-@-moz-keyframes slide-header {
-  0% {
-    height: 0;
-  }
+@-moz-keyframes open-clock {
   100% {
-    height: 85px;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
 }
-@-webkit-keyframes slide-header {
-  0% {
-    height: 0;
-  }
+@-webkit-keyframes open-clock {
   100% {
-    height: 85px;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
 }
-@-o-keyframes slide-header {
-  0% {
-    height: 0;
-  }
+@-o-keyframes open-clock {
   100% {
-    height: 85px;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
 }
-@keyframes slide-header {
+@keyframes open-clock {
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@-moz-keyframes open-btn {
   0% {
-    height: 0;
+    -webkit-transform: translate3d(0, -40px, 0);
+    -moz-transform: translate3d(0, -40px, 0);
+    -o-transform: translate3d(0, -40px, 0);
+    -ms-transform: translate3d(0, -40px, 0);
+    transform: translate3d(0, -40px, 0);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
   }
   100% {
-    height: 85px;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@-webkit-keyframes open-btn {
+  0% {
+    -webkit-transform: translate3d(0, -40px, 0);
+    -moz-transform: translate3d(0, -40px, 0);
+    -o-transform: translate3d(0, -40px, 0);
+    -ms-transform: translate3d(0, -40px, 0);
+    transform: translate3d(0, -40px, 0);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@-o-keyframes open-btn {
+  0% {
+    -webkit-transform: translate3d(0, -40px, 0);
+    -moz-transform: translate3d(0, -40px, 0);
+    -o-transform: translate3d(0, -40px, 0);
+    -ms-transform: translate3d(0, -40px, 0);
+    transform: translate3d(0, -40px, 0);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+}
+@keyframes open-btn {
+  0% {
+    -webkit-transform: translate3d(0, -40px, 0);
+    -moz-transform: translate3d(0, -40px, 0);
+    -o-transform: translate3d(0, -40px, 0);
+    -ms-transform: translate3d(0, -40px, 0);
+    transform: translate3d(0, -40px, 0);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
   }
 }
