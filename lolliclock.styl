@@ -1,30 +1,14 @@
 @import 'nib'
-
-img
-  position absolute
-  left 407px
-  top 37px
-body
-  height 2000px
-input
-  position absolute
-  width 192px
-  left 200px
-  top 40px
-  
 primary100 = #B3E5FC
 primary500 = #03A9F4
 primary700 = #0288D1
-lightTextColor = #FFFFFF
-secondaryTextColor = #727272
 darkTextColor = #212121
-dividerColor = #B6B6B6
-lightGrey = #F6F6F6
 EASE_OUT = cubic-bezier(.4, 0, .2, 1)
 
+//relative animation function
 t(x)
-  (3.5 * x)ms
-  
+  (3 * x)ms
+
 .popover
   position absolute
   top 0
@@ -43,11 +27,11 @@ t(x)
   max-height 0
   animation: open-popover t(100) forwards EASE_OUT
 @keyframes open-popover
+  0% {max-height: 0;}
   100% {max-height: 380px;}
+.popover.animate-out
+  animation: open-popover t(50) forwards reverse EASE_OUT 
 //Header
-// .lolliclock-header-box
-//   height 85px  
-//   background primary500
 .lolliclock-header
   background primary500
   height 85px    
@@ -60,10 +44,11 @@ t(x)
   justify-content center
   overflow hidden
   position absolute
-  // height 0
 .lolliclock-header.animate
   height 0
   animation: slide-header t(50) t(50) forwards EASE_OUT
+.lolliclock-header.animate-out
+  animation: slide-header t(50) forwards reverse EASE_OUT
 @keyframes slide-header
   0%   {height: 0;}
   100% {height: 85px;}
@@ -125,9 +110,7 @@ t(x)
   animation: transition-top-up t(25) t(75) forwards EASE_OUT 
 .lolliclock-hours .lolliclock-time-new.animate
   animation: transition-bottom-up t(25) t(75) forwards EASE_OUT
-// .lolliclock-time-old.animate
-//   animation: transition-bottom-up 1000ms 2500ms forwards
-//Content
+
 .popover-content
   padding 18px 14px
   width 168px
@@ -146,8 +129,8 @@ t(x)
   transform scale(1.25, 1.25)
   opacity 0
 // .lolliclock-canvas-out 
-  // opacity 0.25 //temporary hand fade while the minutes hand animates in
-  // transition opacity 175ms
+//   opacity 0.25 //temporary hand fade while the minutes hand animates in
+//   transition opacity 175ms
 .lolliclock-plate  
   background rgb(240,240,240)
   border-radius 100%   
@@ -155,7 +138,10 @@ t(x)
 .lolliclock-plate.animate
   transform scale(0)
   animation: open-clock t(50) t(50) forwards
+.lolliclock-plate.animate-out
+  animation: open-clock t(50) forwards reverse EASE_OUT
 @keyframes open-clock
+  0% {transform: scale(0);}
   100% {transform: scale(1);}
 
 .lolliclock-canvas
@@ -207,15 +193,17 @@ t(x)
   cursor pointer
 .lolliclock-ampm-btn.animate
   opacity 0
-  // transform scale(0)
-  animation: open-btn t(38) t(62) forwards
+  animation: open-btn t(38) t(62) forwards EASE_OUT
+.lolliclock-ampm-btn.animate-out
+  animation: open-btn t(50) reverse forwards EASE_OUT
 @keyframes open-btn
   0%   {transform: translate3d(0,-40px,0); opacity: 0;}
   100% {transform: translate3d(0,0,0); opacity: 1;} 
 .lolliclock-button.animate
   opacity 0
-  // transform scale(0)
-  animation: open-btn t(25) t(75) forwards  
+  animation: open-btn t(25) t(75) forwards EASE_OUT
+.lolliclock-button.animate-out
+  animation: open-btn t(50) reverse forwards EASE_OUT
 .lolliclock-btn-background
   position absolute
   height 35px
@@ -251,6 +239,9 @@ t(x)
   cursor move 
   cursor -webkit-grabbing
   cursor -moz-grabbing
+  
+.lolliclock-export
+  display hidden
 
 //Optional close buttons
 .lolliclock-buttons
