@@ -1,0 +1,25 @@
+{
+  name: 'lolliclock',
+  version: '0.1.0',
+  authors: [
+    'Matt Krick <matt.krick@gmail.com>'
+  ],
+  description: 'A material design timepicker based on clockpicker',
+  main: 'lolliclock.js',
+  keywords: [
+    'timepicker',
+    'clockpicker',
+    'time',
+    'datetime'
+  ],
+  license: 'MIT',
+  homepage: 'https://github.com/mattkrick/lolliclock',
+  ignore: [
+    '**/.*',
+    'node_modules',
+    'bower_components',
+    'test',
+    'tests',
+    'assets'
+  ]
+}

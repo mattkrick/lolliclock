@@ -30,7 +30,8 @@ t(x)
   0% {max-height: 0;}
   100% {max-height: 380px;}
 .popover.animate-out
-  animation: open-popover t(50) forwards reverse EASE_OUT 
+  animation: open-popover t(50) forwards reverse EASE_OUT
+
 //Header
 .lolliclock-header
   background primary500
@@ -55,8 +56,10 @@ t(x)
 .lolliclock-time
   display flex
   align-self center
+.lolliclock-primary-text
+  color #ffffff
 .lolliclock-hours
-  width 50px
+  width 51px
   text-align right
   opacity .6
   cursor pointer
@@ -66,7 +69,7 @@ t(x)
   opacity .6
   cursor default
 .lolliclock-minutes
-  width 50px
+  width 51px
   opacity .6
   cursor pointer
   overflow hidden
@@ -79,9 +82,8 @@ t(x)
   left 157px
   opacity .6
   padding 3px
-.text-primary
+.lolliclock-primary-text
   opacity 1
-  color #FFFFFF
 .lolliclock-time-old
   opacity 1
   height 54px
@@ -159,10 +161,8 @@ t(x)
 .lolliclock-canvas-fg 
   stroke none
   fill primary700
-
 .lolliclock-canvas-bg
-  fill rgba(primary500, .25)    
- 
+  fill rgba(primary500, .25)
 .lolliclock-tick
   border-radius 100%
   color #666
@@ -174,15 +174,14 @@ t(x)
   font-weight 600
   position absolute
   cursor pointer
-  
 .lolliclock-tick.active
 .lolliclock-tick:hover
   background primary100
-    
+
+//footer
 .lolliclock-ampm-block
   display flex
   justify-content space-around
-    // font-size .8em
 .lolliclock-ampm-btn
   position relative
   height 35px
@@ -255,7 +254,7 @@ t(x)
   width 196px
   top 324px
 .lolliclock-button
-  font-weight 700
+  font-weight 500
   color primary500
   cursor pointer
   padding 8px
@@ -274,4 +273,3 @@ t(x)
 
 
 
-  
