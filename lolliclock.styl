@@ -9,7 +9,7 @@ EASE_OUT = cubic-bezier(.4, 0, .2, 1)
 t(x)
   (3 * x)ms
 
-.popover
+.lolliclock-popover
   position absolute
   top 0
   left 0
@@ -23,13 +23,13 @@ t(x)
   background-color #FFFFFF
   font-size 20px
   user-select none
-.popover.animate
+.lolliclock-popover.animate
   max-height 0
   animation: open-popover t(100) forwards EASE_OUT
 @keyframes open-popover
   0% {max-height: 0;}
   100% {max-height: 380px;}
-.popover.animate-out
+.lolliclock-popover.animate-out
   animation: open-popover t(50) forwards reverse EASE_OUT
 
 //Header

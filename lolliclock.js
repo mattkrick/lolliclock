@@ -10,7 +10,7 @@
 
   // Default options
   LolliClock.DEFAULTS = {
-    startTime: '',	// default time, '' or now' or 'H:MM AM'
+    startTime: '',	      // default time, '' or 'now' or 'H:MM AM'
     autoclose: false,    	// show Cancel/OK buttons
     vibrate: true        	// vibrate the device when dragging clock hand
   };
@@ -51,7 +51,7 @@
 
   // Popover template
   var tpl = [
-    '<div class="popover lolliclock-popover">',
+    '<div class="lolliclock-popover">',
     '<div class="lolliclock-header">',
     '<div class="lolliclock-time">',
     '<div class="lolliclock-hours lolliclock-primary-text">',
@@ -313,7 +313,6 @@
 
   // Show popover
   LolliClock.prototype.show = function () {
-    console.log('isShown: ' + this.isShown);
     if (this.isShown) {
       return;
     }
@@ -382,9 +381,31 @@
     );
 
     //Get the time
-    var defValue = this.options.startTime === 'now' ? new Date() : new Date('1970 1 1 ' + this.options.startTime);
-    var value = this.input.prop('value') ? new Date('1970 1 1 ' + this.input.prop('value')) : defValue;
-    if (isNaN(value.getTime())) value = defValue;
+    function timeToDate(time) {
+      return new Date('1970 1 1 ' + time);
+    }
+
+    function isValidTime(time) {
+      return !isNaN(timeToDate(time).getTime());
+    }
+
+    var value;
+    var inputValue = this.input.prop('value');
+    var defaultValue = this.options.startTime;
+    var placeholderValue = this.input.prop('placeholder');
+
+    if (inputValue && isValidTime(inputValue)) {
+      value = timeToDate(inputValue);
+    } else if (defaultValue === 'now') {
+      value = new Date();
+    } else if (defaultValue && isValidTime(defaultValue)) {
+      value = timeToDate(defaultValue);
+    } else if (placeholderValue && isValidTime(placeholderValue)) {
+      value = timeToDate(placeholderValue);
+    } else {
+      value = timeToDate('');
+    }
+
     this.hours = value.getHours() % 12;
     this.minutes = value.getMinutes();
     //purposefully wrong because we change it next line
