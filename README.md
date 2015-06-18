@@ -8,7 +8,7 @@ A material design timepicker based on clockpicker
 Internals are based off clockpicker, with a million tiny UX changes.
 
 #Usage
-1. Install jquery 
+1. Install jquery
 2. Add the lolliclock .css and .js to your project.
 3. Extend your input field with the `.lolliclock` method including arguments:
 ```
@@ -36,6 +36,7 @@ If your input has a `name` or `Id` of `pick-a-time`, run logic against `pick-a-t
 It looks pretty great
 
 #Versions
+0.2.0 - Fixed IE/Safari date bug, added meteor pkg, added 'change' trigger on input field
 0.1.0 - Initial commit
 
 
