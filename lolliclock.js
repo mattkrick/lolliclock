@@ -120,8 +120,8 @@
     this.amButton = popover.find('#lolliclock-btn-am');
     this.pmButton = popover.find('#lolliclock-btn-pm');
 
-    var exportName = (this.input[0].name || this.input[0].id) + '-export';
-    this.dateTimeVal = $('<input type="hidden" id="' + exportName + '"></input>').insertAfter(input);
+    //var exportName = (this.input[0].name || this.input[0].id) + '-export';
+    //this.dateTimeVal = $('<input type="hidden" id="' + exportName + '"></input>').insertAfter(input);
     // If autoclose is not setted, append a button
     if (!options.autoclose) {
       this.popover.css('height', '380px');
@@ -313,6 +313,7 @@
 
   // Show popover
   LolliClock.prototype.show = function () {
+    //this.input.trigger('blur');
     if (this.isShown) {
       return;
     }
@@ -382,10 +383,21 @@
 
     //Get the time
     function timeToDate(time) {
-      return new Date('1970 1 1 ' + time);
+      var parts = time.split(':');
+      if (parts.length === 2){
+        var hours = +parts[0];
+        var minAM = parts[1].split(' ');
+        if (minAM.length === 2) {
+          var mins = minAM[0];
+          if (minAM[1] === 'PM') hours += 12;
+          return new Date(1970, 1, 1, hours, mins);
+        }
+      }
+      return new Date('x');
     }
 
     function isValidTime(time) {
+
       return !isNaN(timeToDate(time).getTime());
     }
 
@@ -403,9 +415,8 @@
     } else if (placeholderValue && isValidTime(placeholderValue)) {
       value = timeToDate(placeholderValue);
     } else {
-      value = timeToDate('');
+      value = new Date();
     }
-
     this.hours = value.getHours() % 12;
     this.minutes = value.getMinutes();
     //purposefully wrong because we change it next line
@@ -474,11 +485,6 @@
 
   // Toggle to hours or minutes view
   LolliClock.prototype.toggleView = function (view, delay) {
-    var raiseAfterHourSelect = false;
-    if (view === 'minutes' && $(this.hoursView).css("visibility") === "visible") {
-      raiseCallback(this.options.beforeHourSelect);
-      raiseAfterHourSelect = true;
-    }
     var isHours = view === 'hours';
     var nextView = isHours ? this.hoursView : this.minutesView;
     var hideView = isHours ? this.minutesView : this.hoursView;
@@ -642,21 +648,11 @@
 
     var last = this.input.prop('value');
     var value = this.hours + ':' + leadingZero(this.minutes) + " " + this.amOrPm;
-    this.dateTimeVal.prop('value', new Date('1970 1 1 ' + value));
-    //Trigger change if time changed
     if (value !== last) {
       this.input.prop('value', value);
-      this.input.triggerHandler('change');
-      if (!this.isInput) {
-        this.element.trigger('change');
-      }
+      this.input.trigger('input');
+      this.input.trigger('change');
     }
-
-    //if (this.options.autoclose) {
-    this.input.trigger('blur');
-    //}
-
-    raiseCallback(this.options.afterDone);
     this.hide();
   };
 
@@ -673,11 +669,6 @@
       this.popover.remove();
     }
   };
-
-  LolliClock.prototype.getData = function () {
-    return new Date('1970 1 1 ' + this.input.prop('value'));
-  };
-
   // Extends $.fn.lolliclock
   $.fn.lolliclock = function (option) {
     var args = Array.prototype.slice.call(arguments, 1);
