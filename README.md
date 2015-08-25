@@ -1,8 +1,10 @@
 # Lolliclock
 A material design timepicker based on clockpicker
 
-![Autoclose false](https://github.com/mattkrick/lolliclock/blob/master/assets/lolliclock.PNG)
-![Autoclose true](https://github.com/mattkrick/lolliclock/blob/master/assets/lolliclock_autoclose.PNG)
+![Autoclose false](https://github.com/Casear/lolliclock/blob/master/assets/lolliclock.PNG)
+![Autoclose true](https://github.com/Casear/lolliclock/blob/master/assets/lolliclock_autoclose.PNG)
+![hour24 true](https://github.com/Casear/lolliclock/blob/master/assets/lolliclock_24hours.png)
+
 
 #Basics
 Internals are based off clockpicker, with a million tiny UX changes.
@@ -25,6 +27,8 @@ document.getElementById('pick-a-time-export')
 #Features
 ###autoclose
 False (default) includes the Cancel/OK buttons at the bottom.
+###hour24
+False (default) change to 24 hours system.
 
 ###datetime field
 Most backend folks like to save times as dates because they're a breeze to work with.
