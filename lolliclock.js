@@ -12,7 +12,8 @@
   LolliClock.DEFAULTS = {
     startTime: '',	      // default time, '' or 'now' or 'H:MM AM'
     autoclose: false,    	// show Cancel/OK buttons
-    vibrate: true        	// vibrate the device when dragging clock hand
+    vibrate: true,        // vibrate the device when dragging clock hand
+    hour24:false
   };
 
   // Listen touch events in touch screen device, instead of mouse events in desktop.
@@ -44,7 +45,8 @@
 
   // Clock size
   var dialRadius = 84;
-  var radius = 70;
+  var radius = 50;
+  var outSizeRadius = 70;
   var tickRadius = 12;
   var diameter = dialRadius * 2;
   var duration = 350;
@@ -119,7 +121,10 @@
     this.AmPmButtons = popover.find('.lolliclock-ampm-btn');
     this.amButton = popover.find('#lolliclock-btn-am');
     this.pmButton = popover.find('#lolliclock-btn-pm');
-
+    if(this.options.hour24){
+      this.AmPmButtons.hide()
+      this.spanAmPm.hide()
+    }
     //var exportName = (this.input[0].name || this.input[0].id) + '-export';
     //this.dateTimeVal = $('<input type="hidden" id="' + exportName + '"></input>').insertAfter(input);
     // If autoclose is not setted, append a button
@@ -143,24 +148,51 @@
     var i, tick, radian;
 
     // Hours view
-    for (i = 1; i < 13; i++) {
-      tick = tickTpl.clone();
-      radian = i / 6 * Math.PI;
-      tick.css({
-        left: dialRadius + Math.sin(radian) * radius - tickRadius,
-        top: dialRadius - Math.cos(radian) * radius - tickRadius
-      });
-      tick.html(i);
-      hoursView.append(tick);
+    if(options.hour24){
+      for (i = 1; i < 13; i++) {
+        tick = tickTpl.clone();
+        radian = i / 6 * Math.PI;
+        tick.css({
+          left: dialRadius + Math.sin(radian) * radius - tickRadius,
+          top: dialRadius - Math.cos(radian) * radius - tickRadius
+        });
+        tick.html(i);
+        hoursView.append(tick);
+      }
+    
+      for (i = 13; i <= 24; i++) {
+        tick = tickTpl.clone();
+        radian = (i / 6) * Math.PI;
+        tick.css({
+          left: dialRadius + Math.sin(radian) * outSizeRadius - tickRadius,
+          top: dialRadius - Math.cos(radian) * outSizeRadius - tickRadius
+        });
+        if(i === 24){
+          tick.html("00");  
+        }else{
+          tick.html(i);
+        }
+        hoursView.append(tick);
+      }
+    }else{
+      for (i = 1; i < 13; i++) {
+        tick = tickTpl.clone();
+        radian = i / 6 * Math.PI;
+        tick.css({
+          left: dialRadius + Math.sin(radian) * outSizeRadius - tickRadius,
+          top: dialRadius - Math.cos(radian) * outSizeRadius - tickRadius
+        });
+        tick.html(i);
+        hoursView.append(tick);
+      }
     }
-
     // Minutes view
     for (i = 0; i < 60; i += 5) {
       tick = tickTpl.clone();
       radian = i / 30 * Math.PI;
       tick.css({
-        left: dialRadius + Math.sin(radian) * radius - tickRadius,
-        top: dialRadius - Math.cos(radian) * radius - tickRadius
+        left: dialRadius + Math.sin(radian) * outSizeRadius - tickRadius,
+        top: dialRadius - Math.cos(radian) * outSizeRadius - tickRadius
       });
       tick.html(leadingZero(i));
       minutesView.append(tick);
@@ -179,10 +211,16 @@
         dy = (isTouch ? e.originalEvent.touches[0] : e).pageY - y0,
         z = Math.sqrt(dx * dx + dy * dy),
         moved = false;
-
+        outsideMode = true
+      
       // Ignore plate clicks that aren't even close
-      if (z < radius - tickRadius || z > radius + tickRadius) {
-        return;
+      if (z< outSizeRadius + tickRadius && z> outSizeRadius - tickRadius){
+        outsideMode = true
+      }
+      else if (z > radius - tickRadius && z < radius + tickRadius && options.hour24 &&  self.currentView === 'hours'){
+        outsideMode = false
+      }else{
+        return
       }
       e.preventDefault();
       $(document.body).addClass('lolliclock-moving');
@@ -191,7 +229,7 @@
       plate.append(self.canvas);
 
       // Clock
-      self.setHand(dx, dy);
+      self.setHand(dx, dy, outsideMode);
 
       // Mousemove on document
       $(document).off(mousemoveEvent).on(mousemoveEvent, function (e) {
@@ -204,7 +242,7 @@
           return;
         }
         moved = true;
-        self.setHand(x, y);
+        self.setHand(x, y, outsideMode);
       });
 
       // Mouseup on document
@@ -214,7 +252,7 @@
           x = (isTouch ? e.originalEvent.changedTouches[0] : e).pageX - x0,
           y = (isTouch ? e.originalEvent.changedTouches[0] : e).pageY - y0;
         if (x === dx && y === dy) {
-          self.setHand(x, y);
+          self.setHand(x, y, outsideMode);
         }
         if (self.currentView === 'hours') {
           self.toggleView('minutes', duration / 2);
@@ -258,6 +296,7 @@
     g.appendChild(bg);
     g.appendChild(fg);
     g.appendChild(bearing);
+
     svg.appendChild(g);
     canvas.append(svg);
 
@@ -283,7 +322,7 @@
   };
 
   LolliClock.prototype.changeAmPm = function (isAmOrPm) {
-    if (!!isAmOrPm && isAmOrPm === this.amOrPm) return;
+    if (!!isAmOrPm && isAmOrPm === this.amOrPm && this.options.hour24) return;
     this.amOrPm = this.amOrPm === 'AM' ? 'PM' : 'AM';
     this.spanAmPm.html(this.amOrPm);
     $(this.amButton[0].childNodes[0]).toggleClass('lolliclock-active-button-background', (this.amOrPm === 'AM'));
@@ -417,10 +456,15 @@
     } else {
       value = new Date();
     }
-    this.hours = value.getHours() % 12;
+    if(this.options.hour24){
+      this.hours = value.getHours()
+    }else{
+      this.hours = value.getHours()%12
+      this.amOrPm = value.getHours() > 11 ? "AM" : "PM";
+    }
     this.minutes = value.getMinutes();
     //purposefully wrong because we change it next line
-    this.amOrPm = value.getHours() > 11 ? "AM" : "PM";
+    
     this.changeAmPm();
 
     // Set time
@@ -520,7 +564,7 @@
           dx = e.pageX - x0,
           dy = e.pageY - y0,
           z = Math.sqrt(dx * dx + dy * dy);
-        if (z > radius - tickRadius && z < radius + tickRadius) {
+        if (z > outSizeRadius - tickRadius && z < outSizeRadius + tickRadius) {
           $(document.body).addClass('lolliclock-clickable');
         } else {
           $(document.body).removeClass('lolliclock-clickable');
@@ -532,10 +576,19 @@
   // Reset clock hand
   LolliClock.prototype.resetClock = function (delay) {
     var view = this.currentView,
+      outSizeMode = true,
       value = this[view],
-      isHours = view === 'hours',
-      unit = Math.PI / (isHours ? 6 : 30),
-      radian = value * unit,
+      isHours = view === 'hours';
+      if(isHours){
+        unit = Math.PI /  6
+        if(value !== 0 && value <=12 && this.options.hour24){
+          outSizeMode = false;
+        }
+      }else{
+        unit = Math.PI / 30  
+      }
+      
+      var radian = value * unit,
       x = Math.sin(radian) * radius,
       y = -Math.cos(radian) * radius,
       self = this;
@@ -543,15 +596,15 @@
       self.canvas.addClass('lolliclock-canvas-out');
       setTimeout(function () {
         self.canvas.removeClass('lolliclock-canvas-out');
-        self.setHand(x, y);
+        self.setHand(x, y, outSizeMode);
       }, delay);
     } else {
-      this.setHand(x, y);
+      this.setHand(x, y, outSizeMode);
     }
   };
 
   // Set clock hand to (x, y)
-  LolliClock.prototype.setHand = function (x, y) {
+  LolliClock.prototype.setHand = function (x, y, outSizeMode) {
     //Keep radians postive from 1 to 2pi
     var radian = Math.atan2(-x, y) + Math.PI;
     var isHours = this.currentView === 'hours';
@@ -559,13 +612,23 @@
     var value;
 
     // Get the round value
-    value = Math.round(radian / unit);
+    if(outSizeMode && this.options.hour24 && isHours){
+      value = Math.round(radian / unit)
+      if(value === 12 || value ===0){
+        value = 0;
+      }else{
+        value += 12;
+      }
+    }else{
+      value = Math.round(radian / unit);
+    }
+    
     // Get the round radian
     radian = value * unit;
 
     // Correct the hours or minutes
     if (isHours) {
-      if (value === 0) {
+      if (value === 0 && !(this.options.hour24 && outSizeMode) ) {
         value = 12;
       }
       this.fg.style.visibility = 'hidden';
@@ -580,7 +643,7 @@
         value = 0;
       }
     }
-
+  
     // Once hours or minutes changed, vibrate the device
     if (this[this.currentView] !== value) {
       if (vibrate && this.options.vibrate) {
@@ -593,6 +656,7 @@
         }
       }
     }
+  
     //TODO: Keep tens digit static for changing hours
     this[this.currentView] = value;
     function cleanupAnimation($obj) {
@@ -610,6 +674,9 @@
     if (isHours) {
       $oldTime = $(this.spanHours[0].childNodes[0]);
       $newTime = $(this.spanHours[0].childNodes[1]);
+      if(this.options.hour24){
+        value = leadingZero(value);  
+      }
     } else {
       $oldTime = $(this.spanMinutes[0].childNodes[0]);
       $newTime = $(this.spanMinutes[0].childNodes[1]);
@@ -632,10 +699,16 @@
     this.bg.setAttribute('class', 'lolliclock-canvas-bg');
 
     // Set clock hand and others' position
-    var cx = Math.sin(radian) * radius,
-      cy = -Math.cos(radian) * radius;
-    this.hand.setAttribute('x2', Math.sin(radian) * (radius - tickRadius));
-    this.hand.setAttribute('y2', -Math.cos(radian) * (radius - tickRadius));
+    
+    var r = radius
+    if (outSizeMode) {
+      r = outSizeRadius
+    }
+    var cx = Math.sin(radian) * r,
+      cy = -Math.cos(radian) * r;
+    this.hand.setAttribute('x2', Math.sin(radian) * (r - tickRadius));
+    this.hand.setAttribute('y2', -Math.cos(radian) * (r - tickRadius));
+
     this.bg.setAttribute('cx', cx);
     this.bg.setAttribute('cy', cy);
     this.fg.setAttribute('cx', cx);
@@ -647,7 +720,12 @@
     raiseCallback(this.options.beforeDone);
 
     var last = this.input.prop('value');
-    var value = this.hours + ':' + leadingZero(this.minutes) + " " + this.amOrPm;
+    var value = ""
+    if(!this.options.hour24){
+      value = this.hours + ':' + leadingZero(this.minutes) + " " + this.amOrPm;
+    }else{
+      value = leadingZero(this.hours) + ':' + leadingZero(this.minutes) ;
+    }
     if (value !== last) {
       this.input.prop('value', value);
       this.input.trigger('input');
