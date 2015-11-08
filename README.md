@@ -1,6 +1,8 @@
 # Lolliclock
 A material design timepicker based on clockpicker
 
+*No longer maintained* I'll still accept PRs. The javascript world has changed a lot in the last year! ES2015, npm3, react, webpack, and css-modules are looking like the new rulers and it just doesn't make sense to maintain a fun little project like this. For a similar component, please see the time picker in material-ui.  
+
 ![Autoclose false](https://github.com/Casear/lolliclock/blob/master/assets/lolliclock.PNG)
 ![Autoclose true](https://github.com/Casear/lolliclock/blob/master/assets/lolliclock_autoclose.PNG)
 ![hour24 true](https://github.com/Casear/lolliclock/blob/master/assets/lolliclock_24hours.png)
