@@ -45,5 +45,6 @@ It looks pretty great
 0.2.0 - Fixed IE/Safari date bug, added meteor pkg, added 'change' trigger on input field
 0.1.0 - Initial commit
 
-
+#License
+MIT - fork away!
 
